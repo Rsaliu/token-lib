@@ -8,6 +8,7 @@ pub fn add(left: usize, right: usize) -> usize {
 #[cfg(test)]
 mod tests {
     use chrono::Utc;
+    use token::token::TokenType;
 
     use super::*;
     use crypto_lib::crypto::crypto::CryptoOp;
@@ -22,7 +23,8 @@ mod tests {
         let new_token = Token::new(
             user_id,
             token_string,
-            expiry
+            expiry,
+            TokenType::AccessToken
         );
         assert_eq!(new_token.get_user_id(), user_id);
         assert_eq!(new_token.get_expired_time(),expiry);
@@ -40,7 +42,9 @@ mod tests {
             id,
             token_string.clone(),
             user_id,
-            expiry
+            expiry,
+            TokenType::AccessToken,
+            false
         );
         assert_eq!(new_token.get_user_id(), user_id);
         assert_eq!(new_token.get_expired_time(),expiry);
